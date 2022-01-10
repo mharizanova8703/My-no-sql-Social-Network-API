@@ -22,7 +22,7 @@ const userController = {
         select: '-__v',
       })
       .populate({
-        path: 'friens',
+        path: 'friends',
         select: '-__v',
       })
       .select('-__v')
@@ -35,6 +35,32 @@ const userController = {
   createUser({ body }, res) {
     User.create(body)
       .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => res.status(400).json(err))
+  },
+
+  updateUser({ params, body }, res) {
+    User.findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+      runValidators: true,
+    })
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'User with that ID not found!' })
+          return
+        }
+        res.json(dbUserData)
+      })
+      .catch((err) => res.json(err))
+  },
+  deleteUser({ params }, res) {
+    User.findOneAndDelete({ _id: params.id })
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'User with that ID not found!!' })
+          return
+        }
+        res.json(dbUserData)
+      })
       .catch((err) => res.status(400).json(err))
   },
 }
