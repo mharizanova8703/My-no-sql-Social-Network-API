@@ -19,7 +19,7 @@ const thoughtController = {
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
-          { username: body.username },
+          { _id: body.userId },
           { $push: { thoughts: _id } },
           { new: true },
         )
@@ -35,12 +35,6 @@ const thoughtController = {
   },
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.id })
-      .populate({
-        path: 'user',
-        select: '-__v',
-      })
-      .select('-__v')
-      .sort({ _id: -1 })
       .then((dbThoughtData) => res.json(dbThoughtData))
       .catch((err) => {
         console.log(err)
