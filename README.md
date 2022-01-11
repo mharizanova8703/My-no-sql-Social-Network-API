@@ -10,6 +10,12 @@ MongoDB is a popular choice for many social networks due to its speed with large
 * MangoDb
 * Express
 
+ # License 
+ 
+  ![Github license](https://img.shields.io/badge/-MVC-pink)
+   ![Github license](https://img.shields.io/badge/INSOMNIA-INSOMNIA-brightgreen)
+   ![Github license](https://img.shields.io/badge/mangoose-mangoose-yellow)
+ 
 ## User Story
 
 ```md
